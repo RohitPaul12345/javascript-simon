@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
     'use strict';
 
-    var file_list =  [
+  let file_list =  [
         'js/simon.js',
         'Gruntfile.js'
     ];
