@@ -1,7 +1,7 @@
 define(['jquery'], function($) {
 	'use strict';
 
-	var Simon = {
+	let Simon = {
 		sequence: [],
 		copy: [],
 		round: 0,
@@ -9,7 +9,7 @@ define(['jquery'], function($) {
 		mode: 'normal',
 	
 		init: function() {
-			var that = this;
+			let that = this;
 			$('[data-action=start]').on('click', function() {
 				that.startGame();
 			});
@@ -39,7 +39,7 @@ define(['jquery'], function($) {
 		// Since the player can never actually "win", we just listen for clicks as the user 
 		// plays the sequence and each time, check if they lost
 		registerClick: function(e) {
-			var desiredResponse = this.copy.shift();
+			let desiredResponse = this.copy.shift();
 			var actualResponse = $(e.target).data('tile');
 			this.active = (desiredResponse === actualResponse);
 			this.checkLose();
@@ -75,7 +75,7 @@ define(['jquery'], function($) {
 
 		// allow user to interact with the game
 		activateSimonBoard: function() {
-			var that = this;
+			let that = this;
 			$('.simon')
 				.on('click', '[data-tile]', function(e) {
 					that.registerClick(e);
@@ -106,9 +106,9 @@ define(['jquery'], function($) {
 		},
 
 		animate: function(sequence) {
-			var i = 0;
-			var that = this;
-			var interval = setInterval(function() {
+			let i = 0;
+			let that = this;
+			let interval = setInterval(function() {
 				that.playSound(sequence[i]);
 				that.lightUp(sequence[i]);
 
@@ -122,7 +122,7 @@ define(['jquery'], function($) {
 
 		lightUp: function(tile) {
 			if (this.mode !== 'sound-only') {
-				var $tile = $('[data-tile=' + tile + ']').addClass('lit');
+				let $tile = $('[data-tile=' + tile + ']').addClass('lit');
 				window.setTimeout(function() {
 					$tile.removeClass('lit');
 				}, 300);
@@ -135,7 +135,7 @@ define(['jquery'], function($) {
 		// 2. <audio> tag provides our fallbacks (ogg, mp3).
 		playSound: function(tile) {
 			if (this.mode !== 'light-only') {
-				var audio = $('<audio autoplay></audio>');
+				let audio = $('<audio autoplay></audio>');
 				audio.append('<source src="sounds/' + tile + '.ogg" type="audio/ogg" />');
 				audio.append('<source src="sounds/' + tile + '.mp3" type="audio/mp3" />');
 				$('[data-action=sound]').html(audio);
